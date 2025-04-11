@@ -1,24 +1,30 @@
 # Задача «Сортировка выбором» ОПК ФФ НГУ
 # Стерлягов Сергей, 24310, 2025г
 
+
+def id_min_elem(array):
+    """ Получает на вход массив, находит в нем минимальный элемент """
+    min_id = 0 
+    min_elem = array[0]
+    for i in range(len(array)): # Ищем индекс минимального элемента перебором всех
+        try:
+            if array[i] < min_elem:
+                min_id = i
+                min_elem = array[i]
+        except:
+            return 'В массиве разные типы данных!'
+    return min_id
+
+
 def selection_sort(array):
-    """ Получает на фход несортированный массив. Сортирует его выбором. """
-
+    """ Получает на вход несортированный массив. Сортирует его выбором. """
     length = len(array)
-
-    # Проверяем, что длина массива больше 1
     if length > 1: 
-        # Проходим по всем элементам массива
-        for i in range(length): 
-
+        for i in range(length - 1): 
             # "Встаем" на элемент массива
             min_id = i 
-
             # Находим индекс минимального элемента в оставшейся части массива
-            for j in range(i + 1, length): 
-                if array[j] < array[min_id]:
-                    min_id = j
-            
+            min_id = id_min_elem(array[i+1:])
             # Меняем найденный минимальный элемент с текущим
             array[i], array[min_id] = array[min_id], array[i]
 
