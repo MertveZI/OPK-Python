@@ -4,14 +4,16 @@
 
 def id_min_elem(array):
     """ Получает на вход массив, находит в нем минимальный элемент """
+    if not array:
+        return 'Массив пуст!'  # Обработка пустого массива, если требуется
     min_id = 0 
     min_elem = array[0]
-    for i in range(len(array)): # Ищем индекс минимального элемента перебором всех
+    for i in range(len(array)):
         try:
-            if array[i] < min_elem:
+            if array[i] < min_elem:  
                 min_id = i
                 min_elem = array[i]
-        except:
+        except TypeError:
             return 'В массиве разные типы данных!'
     return min_id
 
@@ -24,9 +26,9 @@ def selection_sort(array):
             # "Встаем" на элемент массива
             min_id = i 
             # Находим индекс минимального элемента в оставшейся части массива
-            min_id = id_min_elem(array[i+1:])
+            min_id = id_min_elem(array[i::])
             # Меняем найденный минимальный элемент с текущим
-            array[i], array[min_id] = array[min_id], array[i]
+            array[i], array[i + min_id] = array[i + min_id], array[i]
 
 
 # Пример использования

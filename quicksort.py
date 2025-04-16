@@ -13,12 +13,21 @@ def quick_sort(array):
         base = array[length // 2]
         
         # Разделяем массив на три части:
-        left = [x for x in array if x < base] # 1. Элементы меньше опорного
-        middle = [x for x in array if x == base] # 2. Элементы равные опорному
-        right = [x for x in array if x > base] # 3. Элементы больше опорного
-        
-        # Рекурсивно применяем quicksort к левой и правой частям
-        array = quick_sort(left) + middle + quick_sort(right)
+        left = 0
+        for i in range(length):
+            if array[i]< base:
+                temp = array[left]
+                array[left] = array[i]
+                array[i] = temp 
+                left += 1
+        mid = left
+        for i in range(left, length):
+            if array[i] == base:
+                temp = array[mid]
+                array[mid] = array[i]
+                array[i] = temp
+                mid += 1 
+        array = quick_sort(array[:left+1]) + array[left:mid+1] + quick_sort(array[mid:])
 
 # Пример использования
 if __name__ == "__main__": # Проверка на импортированность
