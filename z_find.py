@@ -22,14 +22,14 @@ def z_find(stroke, pattern):
     cur_pref = 0
     start, end = 0, 0
     for i in range(str_len):
-        if i < end:
-            if i + pref[i - start] < end:
+        if i < end: #если конец фрагмента больше i
+            if i + pref[i - start] < end: #если не вылезает за границы фрагмента
                 cur_pref = pref[i-start]
-            else:
+            else: #если вылезает, то прощаем подсчет
                 cur_pref = end - i + prefix_calc(stroke[end:], pattern[end-i:])
                 if i + cur_pref > end:
                     start, end = i, i + cur_pref
-        else:
+        else: # Считаем префикс
             cur_pref = prefix_calc(stroke[i:], pattern)
             start, end = i, i + cur_pref
         pref[i] = cur_pref
