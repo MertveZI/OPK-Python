@@ -5,16 +5,16 @@
 def id_min_elem(array):
     """ Получает на вход массив, находит в нем минимальный элемент """
     if not array:
-        return 'Массив пуст!'  # Обработка пустого массива, если требуется
+        raise Exception("empty array!") # Обработка пустого массива, если требуется
     min_id = 0 
     min_elem = array[0]
-    for i in range(len(array)):
+    for i, num in enumerate(array):
         try:
-            if array[i] < min_elem:  
+            if num < min_elem:  
                 min_id = i
-                min_elem = array[i]
+                min_elem = num
         except TypeError:
-            return 'В массиве разные типы данных!'
+            raise Exception("diffrent types in array!")
     return min_id
 
 
@@ -28,8 +28,8 @@ def selection_sort(array):
             # Находим индекс минимального элемента в оставшейся части массива
             min_id = id_min_elem(array[i::])
             # Меняем найденный минимальный элемент с текущим
-            array[i], array[i + min_id] = array[i + min_id], array[i]
-
+            array[i], array[i+min_id] = array[i+min_id], array[i]
+ 
 
 # Пример использования
 if __name__ == "__main__": # Проверка на импортированность
