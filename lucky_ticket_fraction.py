@@ -11,18 +11,18 @@ def lucky_tickets_frac(length):
     try:
         length = int(length)
     except ValueError:
-        raise Exception('Введено не число!') # Проверка на то, что length число
+        raise Exception('Введено не число!')
     except Exception:
-        raise Exception('Непредвиденная ошибка!') # Непредвиденная ошибка
+        raise Exception('Непредвиденная ошибка!')
     if length % 2 != 0:
-        raise Exception('Введено нечетное число!') # Проверка на четность
+        raise Exception('Введено нечетное число!')
     elif length > 32:
-        raise Exception('Введено число болше 32!') # Проверка на ограничение по длине
+        raise Exception('Введено число болше 32!')
     L_half = length//2
-    result = 0 # Переменная под ответ
+    result = 0
     Fact = m.factorial(L_half) # Константа факториала
-    sums = defaultdict(lambda: 0) # Словарь с суммами
-    nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # Список цифр
+    sums = defaultdict(lambda: 0)
+    nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     # Создание списка всех возможных комбинаций
     kombs = list(itertools.combinations_with_replacement(nums, L_half)) 
     # Заполнение словаря сумм значениями
@@ -40,15 +40,11 @@ def lucky_tickets_frac(length):
         result += sums[i] ** 2
     # Вычисление доли
     fraction = result / (10 ** length)
-    # Вывод ответа
     return fraction
 
 
 # Пример использования
-if __name__ == "__main__": # Проверка на импортированность
-    # Приветственное сообщение и снятие данных
+if __name__ == "__main__":
     length = input('\n Программа вычисления доли счастливых билетов\
                     \n Введите длину билета(четное число <= 32): ')
-    print("Доля счастливых билетов:", lucky_tickets_frac(length)) # Вывод ответа
-else:
-    print('Скрипт импортирован!') # Вывод импортированности скрипта
+    print("Доля счастливых билетов:", lucky_tickets_frac(length))
